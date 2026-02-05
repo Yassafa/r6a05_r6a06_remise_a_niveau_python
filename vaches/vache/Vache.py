@@ -1,11 +1,11 @@
-import vaches.exceptions.InvalidException
+from vaches.exceptions import InvalidVacheException
 
 class Vache:
-    _AGE_MAX = 25
-    _POIDS_MAX = 1000.0
-    _PANSE_MAX = 50.0
-    _POIDS_MIN_PANSE = 2.0
-    _RENDEMENT_RUMINATION = 0.25
+    AGE_MAX = 25
+    POIDS_MAX = 1000.0
+    PANSE_MAX = 50.0
+    POIDS_MIN_PANSE = 2.0
+    RENDEMENT_RUMINATION = 0.25
     _NEXT_ID = 1
 
     def __init__(self, petitNom, age, poids):
