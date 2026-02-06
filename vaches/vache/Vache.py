@@ -1,5 +1,6 @@
 from vaches.exceptions import InvalidVacheException
 
+
 class Vache:
     AGE_MAX = 25
     POIDS_MAX = 1000.0
@@ -41,7 +42,13 @@ class Vache:
         return "Vache " + self.nom
 
     def brouter(self, quantite, nourriture=None):
-        self._panse += quantite
+        if quantite <= 0:
+            raise InvalidVacheException("Quantité invalide.")
+        elif nourriture is not None:
+            raise InvalidVacheException("Nourriture fournie à une Vache normale.")
+        else:
+            self._panse += quantite
+            self._valider_etat()
 
     def ruminer(self):
         self._valider_rumination_possible()
@@ -58,13 +65,13 @@ class Vache:
         self._valider_etat()
 
     def _calculer_lait(self, panse_avant):
-        pass
+        return 0.0
 
     def _stocker_lait(self, lait):
-        pass
+        return
 
     def _post_rumination(self, panse_avant, lait):
-        pass
+        return
 
     def _ajouter_panse(self):
         pass
@@ -74,7 +81,7 @@ class Vache:
             raise InvalidVacheException("Panse vide")
 
     def _valider_etat(self):
-        if self.nom.isspace():
+        if self.nom.isspace() or self.nom == "":
             raise InvalidVacheException("Nom vide")
         if self.age < 0 or self.age > self.AGE_MAX:
             raise InvalidVacheException("Âge invalide")
