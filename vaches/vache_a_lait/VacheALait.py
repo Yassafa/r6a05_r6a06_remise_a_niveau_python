@@ -1,3 +1,4 @@
+from strategy.StandardMilkStrategy import StandardMilkStrategy
 from vaches.exceptions import InvalidVacheException
 from vaches.vache import Vache
 
@@ -8,6 +9,7 @@ class VacheALait(Vache):
 
     def __init__(self, petitNom, poids):
         super().__init__(petitNom, poids)
+        self._strategy_rumination = StandardMilkStrategy()
         self._lait_disponible = 0.0
         self._lait_total_produit = 0.0
         self._lait_total_traite = 0.0
@@ -36,13 +38,3 @@ class VacheALait(Vache):
             self._lait_disponible -= litres
             self._lait_total_traite += litres
             return litres
-
-    def _calculer_lait(self, panse_avant):
-        lait = VacheALait.RENDEMENT_LAIT * panse_avant
-        return lait
-
-    def _stocker_lait(self, lait):
-        self._lait_disponible += lait
-        self._lait_total_produit += lait
-        if self.lait_disponible > VacheALait.PRODUCTION_LAIT_MAX:
-            raise InvalidVacheException("Producion max dépassée")

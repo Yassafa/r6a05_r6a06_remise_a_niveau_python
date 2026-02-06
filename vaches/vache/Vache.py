@@ -1,3 +1,4 @@
+from strategy.NoMilkStrategy import NoMilkStrategy
 from vaches.exceptions import InvalidVacheException
 
 
@@ -14,6 +15,7 @@ class Vache:
         self._id = Vache.NEXT_ID
         Vache.NEXT_ID += 1
         self._petitNom = petitNom
+        self._strategy_rumination = NoMilkStrategy()
         self._poids = poids
         self._panse = Vache.PANSE_VIDE
         self._age = Vache.AGE_NAISSANCE
@@ -56,23 +58,14 @@ class Vache:
         panse_avant = self.panse
         gain = self.RENDEMENT_RUMINATION * panse_avant
         self._poids += gain
-        lait = self._calculer_lait(panse_avant)
-        self._stocker_lait(lait)
+        lait = self._strategy_rumination.calculer_lait(self, panse_avant)
+        self._strategy_rumination.stocker_lait(self, lait)
         self._panse = 0.0
-        self._post_rumination(panse_avant, lait)
+        self._strategy_rumination.post_rumination(self, panse_avant, lait)
 
     def vieillir(self):
         self._age += 1
         self._valider_etat()
-
-    def _calculer_lait(self, panse_avant):
-        return 0.0
-
-    def _stocker_lait(self, lait):
-        return
-
-    def _post_rumination(self, panse_avant, lait):
-        return
 
     def _ajouter_panse(self):
         pass
