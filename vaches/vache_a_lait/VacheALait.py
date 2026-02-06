@@ -39,12 +39,10 @@ class VacheALait(Vache):
 
     def _calculer_lait(self, panse_avant):
         lait = VacheALait.RENDEMENT_LAIT * panse_avant
+        return lait
+
+    def _stocker_lait(self, lait):
         self._lait_disponible += lait
         self._lait_total_produit += lait
         if self.lait_disponible > VacheALait.PRODUCTION_LAIT_MAX:
             raise InvalidVacheException("Producion max dépassée")
-        else:
-            return lait
-
-    def _stocker_lait(self, lait):
-        return
