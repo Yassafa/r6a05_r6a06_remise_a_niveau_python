@@ -3,19 +3,20 @@ from vaches.exceptions import InvalidVacheException
 
 class Vache:
     AGE_MAX = 25
+    AGE_NAISSANCE = 0
     POIDS_MAX = 1000.0
     PANSE_MAX = 50.0
-    POIDS_MIN_PANSE = 2.0
+    PANSE_VIDE = 0.0
     RENDEMENT_RUMINATION = 0.25
     NEXT_ID = 1
 
-    def __init__(self, petitNom, age, poids):
+    def __init__(self, petitNom, poids):
         self._id = Vache.NEXT_ID
         Vache.NEXT_ID += 1
         self._petitNom = petitNom
         self._poids = poids
-        self._panse = 0
-        self._age = age
+        self._panse = Vache.PANSE_VIDE
+        self._age = Vache.AGE_NAISSANCE
         self._valider_etat()
 
     @property
