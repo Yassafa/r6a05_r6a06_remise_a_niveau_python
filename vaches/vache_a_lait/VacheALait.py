@@ -25,6 +25,14 @@ class VacheALait(Vache):
     @property
     def lait_total_traite(self):
         return self._lait_total_traite
+    
+    @lait_disponible.setter
+    def lait_disponible(self, value):
+        self._lait_disponible = value
+
+    @lait_total_produit.setter
+    def lait_total_produit(self, value):
+        self._lait_total_produit = value
 
     def __str__(self):
         return "Vache à lait " + self.nom

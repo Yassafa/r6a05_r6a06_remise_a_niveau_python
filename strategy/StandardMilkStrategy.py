@@ -9,8 +9,8 @@ class StandardMilkStrategy:
         return lait
 
     def stocker_lait(self, vache, lait):
-        vache._lait_disponible += lait
-        vache._lait_total_produit += lait
+        vache.lait_disponible += lait
+        vache.lait_total_produit += lait
         if vache.lait_disponible > vache.PRODUCTION_LAIT_MAX:
             raise InvalidVacheException("Producion max dépassée")
 
