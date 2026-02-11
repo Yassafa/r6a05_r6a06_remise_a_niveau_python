@@ -1,6 +1,6 @@
 from vaches.exceptions import InvalidVacheException
 from vaches.vache_a_lait import VacheALait
-from nourriture import TypeNourriture
+from nourriture.TypeNourriture import TypeNourriture
 
 
 class PieNoire(VacheALait):
