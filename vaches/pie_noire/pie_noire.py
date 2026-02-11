@@ -16,7 +16,13 @@ class PieNoire(VacheALait):
         super().__init__(petitNom, poids)
         self._nombreTacheNoire = 0
         self._nombreTacheBlanche = 0
-        self._ration = {}
+        self._ration = {
+            TypeNourriture.MARGUERITE: 0,
+            TypeNourriture.HERBE: 0,
+            TypeNourriture.FOIN: 0,
+            TypeNourriture.PAILLE: 0,
+            TypeNourriture.CEREALES: 0,
+        }
 
     @property
     def nombreTacheNoire(self):
@@ -40,5 +46,12 @@ class PieNoire(VacheALait):
     def _calculer_lait(self, panse_avant):
         lait = 0
         for nourriture in self._ration.keys():
-            lait += self._ration[nourriture].quantite * self.COEFFICIENT_NUTRITIONNEL[nourriture]
+            lait += self._ration[nourriture] * self.COEFFICIENT_NUTRITIONNEL[nourriture]
+        self._ration = {
+            TypeNourriture.MARGUERITE: 0,
+            TypeNourriture.HERBE: 0,
+            TypeNourriture.FOIN: 0,
+            TypeNourriture.PAILLE: 0,
+            TypeNourriture.CEREALES: 0,
+        }
         return self.RENDEMENT_LAIT * lait
